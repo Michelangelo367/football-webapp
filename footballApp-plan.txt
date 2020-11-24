@@ -1,0 +1,11 @@
+1. Data:
+	- Scrape wikipedia for player stats and info
+2. Dashboard (Dash)
+	- Search boxes
+		- Player search
+		- Team search
+		- Country
+	- Display picture
+	- Stats
+	- Time series of something
+	- xG?
