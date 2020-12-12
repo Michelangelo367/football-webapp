@@ -21,11 +21,24 @@ app = dash.Dash(__name__,
 app.layout = html.Div([
     html.H6("Enter the name of a player"),
 	html.Div([
+		html.Div([
 		html.Div(
 			[dcc.Input(id='my-input',
 						value='Eden Hazard', type='text')
 			], className='button1'),
-		html.Div(html.Button('Submit', id='button1', n_clicks=0))
+		html.Div(html.Button('Submit', id='button1', n_clicks=0)),
+		],className='two columns'),
+		html.Div([
+			dcc.Dropdown(
+				options=[
+					{'label': 'Goals', 'value': 'Goals'},
+					{'label': 'Assists', 'value': 'Assists'},
+					{'label': 'Games Played', 'value': 'Games Played'}
+				],
+				value='Goals',
+				clearable=False
+			)
+		], className='two columns')
 	],className='row'),
     html.Br(),
 	# Goals Graph
