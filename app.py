@@ -30,6 +30,7 @@ app.layout = html.Div([
 		],className='two columns'),
 		html.Div([
 			dcc.Dropdown(
+				id="dropdown",
 				options=[
 					{'label': 'Goals', 'value': 'Goals'},
 					{'label': 'Assists', 'value': 'Assists'},
@@ -119,20 +120,25 @@ def goals_table(json_df):
 													}
 										)
 									)
+	else:
+		return dash.no_update
+
 
 @app.callback(
 	Output('totgoals', 'figure'),
-	[Input('stats-data', 'children')]
+	[Input('stats-data', 'children'),
+	Input('dropdown', 'value')
+	]
 )
-def goalsLine(json_df):
+def goalsLine(json_df, dropdownVal):
 	fig = go.Figure()
 
 	if json_df:
 		df = pd.read_json(json_df)
-		fig = totGoalsLine(df)
+		fig = totGoalsLine(df, dropdownVal)
 		return fig
-
-
+	else:
+		return dash.no_update
 
 if __name__ == '__main__':
     app.run_server(debug=True)
