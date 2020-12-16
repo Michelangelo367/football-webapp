@@ -11,7 +11,7 @@ def sumStats(playerName):
 	return statTable
 
 
-def totGoalsLine(statTable):
+def totGoalsLine(statTable, val):
 	y = statTable['Total_Goals'].iloc[:-2]
 	x = statTable['Season_Season'].iloc[:-2].drop_duplicates()
 	
@@ -29,34 +29,64 @@ def totGoalsLine(statTable):
 	goalPerGame['Goals per Game'] = goalGames
 	fig = make_subplots(specs=[[{"secondary_y": True}]])
 
-	fig.add_trace(
-			go.Bar(
-			y=y,
-			x=x,
-			name="Goals per Season"   
-			)
-		)
-
-	fig.add_trace(
-		go.Scatter(y=goalPerGame['Goals per Game'],
+	if val == "Goals":
+		fig.add_trace(
+				go.Bar(
+				y=y,
 				x=x,
-				name="Goals per Game"
-				),
-			secondary_y=True,
-	)
-
-	fig.update_layout(
-		title='Total Goals per Season',
-		xaxis_title="Season",
-		yaxis_title="Goals per Season",
-		font_color="white",
-		plot_bgcolor='rgb(0, 12, 39)',
-		paper_bgcolor='rgb(0, 12, 39)',
-		xaxis =  {'showgrid': False},
-        yaxis = {'showgrid': False}
+				name="Goals per Season"   
+				)
+			)
+		fig.add_trace(
+			go.Scatter(y=goalPerGame['Goals per Game'],
+					x=x,
+					name="Goals per Game"
+					),
+				secondary_y=True,
 		)
 
-	return fig
+		fig.update_layout(
+			title='Total Goals per Season',
+			xaxis_title="Season",
+			yaxis_title="Goals per Season",
+			font_color="white",
+			plot_bgcolor='rgb(0, 12, 39)',
+			paper_bgcolor='rgb(0, 12, 39)',
+			xaxis =  {'showgrid': False},
+			yaxis = {'showgrid': False}
+			)
+	
+		return fig
+
+	elif val == "Games Played":
+		fig.add_trace(
+				go.Bar(
+				y=statTable['Total_Apps'].iloc[:-2],
+				x=x,
+				name="Games Played per Season"   
+				)
+			)
+		fig.add_trace(
+			go.Scatter(y=statTable['Total_Goals'].iloc[:-2],
+					x=x,
+					name="Goals per Season"
+					),
+				secondary_y=True,
+		)
+
+		fig.update_layout(
+			title='Games Played per Season',
+			xaxis_title="Season",
+			yaxis_title="Games Played per Season",
+			font_color="white",
+			plot_bgcolor='rgb(0, 12, 39)',
+			paper_bgcolor='rgb(0, 12, 39)',
+			xaxis =  {'showgrid': False},
+			yaxis = {'showgrid': False}
+			)
+	
+		return fig	
+
 
 # Next:
 # See e.g. https://www.dataskunkworks.com/latest-posts/wikipedia-scraping-2020
