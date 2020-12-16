@@ -2,54 +2,35 @@
 # returns goals scored, and some info
 
 from bs4 import BeautifulSoup
-import requests
 import pandas as pd
+from pandas import DataFrame
 import wikipedia as wiki
-
-
-import numpy as np
 import lxml
-import requests
-from bs4 import BeautifulSoup
 import urllib.request
-import random
-import html5lib
 
-# import seaborn as sns
-
-# from matplotlib import style
-# import matplotlib as mpl
-# import matplotlib.pyplot as plt
-
-
-
-# player = "Eden Hazard"
-# url = wiki.page(player)
-# title = url.title
-# summary = url.summary
-# print(summary)
-
-# Scrape Player Wikipedia Site
-# player_name = "Eden Hazard"
-
-def player_page(player_name):
+def _player_page(player_name: str) -> DataFrame:
+    
 	player_name1 = player_name.replace(" ", "_")
 	# convert to Proper Case
 	player_name1 = player_name1.title()
 
-	# Using url
+	# Get player wikipedia page
 	url = "https://en.wikipedia.org/wiki/" + player_name1
 
 	# open url with urllib.request
 	page = urllib.request.urlopen(url)
-
 	soup = BeautifulSoup(page, "lxml")
 
 	return soup
 
-def table(player):
+def table(player: str) -> DataFrame:
+    """
+    Get player stats table from wikipedia.
+    Input: Player name
+    Output: a dataframe
+    """
 
-    soup = player_page(player)
+    soup = _player_page(player)
 
     # Club stats section
     heading = soup.find(id='Club')
@@ -61,7 +42,7 @@ def table(player):
 
     # Only keep final total col
     statTable = statTable[~statTable.Season_Season.str.contains('Total')]
-	# print(statTable)
+
     return statTable
 
 

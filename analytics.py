@@ -5,12 +5,6 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 
-def sumStats(playerName):
-	statTable = table(playerName)
-
-	return statTable
-
-
 def totGoalsLine(statTable, val):
 	y = statTable['Total_Goals'].iloc[:-2]
 	x = statTable['Season_Season'].iloc[:-2].drop_duplicates()
@@ -20,15 +14,20 @@ def totGoalsLine(statTable, val):
 	totGoals = int(statTable['Total_Goals'].tail(1))
 	goalGames = round(totGoals/totGames,2)
 
+	# League-only stats
 	totGamesL = int(statTable['League_Apps'].iloc[-1])
 	totGoalsL = int(statTable['League_Goals'].iloc[-1])
 	goalGamesL = round(totGoalsL/totGamesL,2)
 
+	# Goals per game ratio
 	goalGames = round(totGoals/totGames,2)
 	goalPerGame = pd.DataFrame(statTable['Season_Season'].iloc[:-2].drop_duplicates())
 	goalPerGame['Goals per Game'] = goalGames
+
+	# Create figure
 	fig = make_subplots(specs=[[{"secondary_y": True}]])
 
+	# If goals is chosen in dropdown;
 	if val == "Goals":
 		fig.add_trace(
 				go.Bar(
@@ -58,6 +57,7 @@ def totGoalsLine(statTable, val):
 	
 		return fig
 
+	# If games played is chosen in dropdown;
 	elif val == "Games Played":
 		fig.add_trace(
 				go.Bar(
@@ -86,13 +86,3 @@ def totGoalsLine(statTable, val):
 			)
 	
 		return fig	
-
-
-# Next:
-# See e.g. https://www.dataskunkworks.com/latest-posts/wikipedia-scraping-2020
-
-
-# Analytics;
-# - sumstats
-# - goals per game
-# - goals per game per competition plots
