@@ -8,7 +8,7 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # Module
-from analytics import sumStats, totGoalsLine
+from analytics import totGoalsLine
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
