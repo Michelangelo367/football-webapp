@@ -7,6 +7,17 @@ def layout() -> html.Div:
     Returns the main html div element for the app
     """
     layout = html.Div([
+
+        # navbar
+        html.Div(
+            html.Div(
+                html.H5("⚽Football Stats Dashboard"),
+                className="navbar-text"),
+                className="navbar"),
+
+        # Body
+        html.Div([
+
         html.H6("Enter the name of a player"),
         html.Div([
             html.Div([
@@ -52,6 +63,9 @@ def layout() -> html.Div:
                 style={"display" : 'none'}
                 )
 
+        ],className='main-body')
+
     ])
+
 
     return layout
