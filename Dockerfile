@@ -3,4 +3,4 @@ WORKDIR /football-app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY ./app ./app
-CMD ['python", "./app/app.py']
+CMD ["python", "./app/app.py"]
