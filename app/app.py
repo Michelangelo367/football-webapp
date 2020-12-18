@@ -1,17 +1,21 @@
+# Import dash and dash dependencies
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-from get_data import table
 import dash_table
+
+# Other libs
 import pandas as pd
 import plotly.graph_objects as go
+import argparse
 
 # impoty layout component
 from layout import layout
-
-# Module
+# Import helper functions
 from analytics import totGoalsLine
+from get_data import table
+
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
@@ -97,5 +101,13 @@ def goalsLine(json_df, dropdownVal):
 	else:
 		return dash.no_update
 
+def _input_args():
+	prs = argparse.ArgumentParser(description="app start")
+	prs.add_argument('-H', '--host', metavar=('HOST'))
+	prs.add_argument('-p', '--port', metavar=('PORT'))
+	return prs.parse_args()
+
+
 if __name__ == '__main__':
-    app.run_server(debug=True)
+	arg = _input_args()
+	app.run_server(host='0.0.0.0', debug=True, port=8050)
