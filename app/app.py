@@ -101,13 +101,5 @@ def goalsLine(json_df, dropdownVal):
 	else:
 		return dash.no_update
 
-def _input_args():
-	prs = argparse.ArgumentParser(description="app start")
-	prs.add_argument('-H', '--host', metavar=('HOST'))
-	prs.add_argument('-p', '--port', metavar=('PORT'))
-	return prs.parse_args()
-
-
 if __name__ == '__main__':
-	arg = _input_args()
 	app.run_server(host='0.0.0.0', debug=True, port=8050)
