@@ -77,11 +77,11 @@ def goals_table(json_df):
 										style_table={'overflowX': 'scroll'},
 										style_as_list_view=True,
 										style_header={
-											'backgroundColor': 'rgb(21, 32, 58)',
+											'backgroundColor': 'rgb(0, 12, 39)',
 											'fontWeight': 'bold'
 											},
 										style_cell={
-													'backgroundColor': 'rgb(21, 32, 58)',
+													'backgroundColor': 'rgb(0, 12, 39)',
 													'textAlign': 'center',
 													'fontSize':15,
 													'font-family':'sans-serif'
