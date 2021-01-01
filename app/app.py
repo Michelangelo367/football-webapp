@@ -2,7 +2,7 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
 import dash_table
 
 # Other libs
@@ -36,10 +36,17 @@ app.layout = layout()
 	]
 )
 def update_output_div(input_value, n_clicks):
-	# Create statTable df and store as hidden div
-	if n_clicks >= 1:
+	"""Create statTable df and store as hidden div"""
+
+	changed_id = [p['prop_id'] for p in dash.callback_context.triggered][0]
+	if 'button1' in changed_id:
 		df = table(input_value)
 		return df.to_json()
+
+	# if n_clicks > 0:
+	# 	df = table(input_value)
+	# 	return df.to_json()
+	
 	else:
 		return dash.no_update
 
