@@ -11,7 +11,7 @@ def layout() -> html.Div:
         # navbar
         html.Div(
             html.Div(
-                html.H5("⚽Football Stats Dashboard"),
+                html.H5("⚽ Football Stats Dashboard"),
                 className="navbar-text"),
                 className="navbar"),
 
@@ -32,10 +32,10 @@ def layout() -> html.Div:
                     id="dropdown",
                     options=[
                         {'label': 'Goals', 'value': 'Goals'},
-                        {'label': 'Assists', 'value': 'Assists'},
+                        # {'label': 'Assists', 'value': 'Assists'},
                         {'label': 'Games Played', 'value': 'Games Played'}
                     ],
-                    value='Goals',
+                    value='Games Played',
                     clearable=False
                 )
             ], className='two columns')

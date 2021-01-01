@@ -21,7 +21,7 @@ docker run -p 8050:8050 football-app
 ### Built With
 Python, Pandas, and Plotly Dash.
 
-### Setting up Dev
+### Setting up Dev*
 
 ```shell
 git clone https://github.com/sele14/football-webapp.git
@@ -33,4 +33,9 @@ py -m venv venv
 
 # install depends
 py -m pip install -r requirements.txt
+
+# Run development server
+py app/app.py
 ```
+
+### * Note: replace 'py' with 'python3' or equivalent for your operating system and setup.

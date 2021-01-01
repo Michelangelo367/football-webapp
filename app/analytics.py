@@ -15,9 +15,9 @@ def totGoalsLine(statTable, val):
 	goalGames = round(totGoals/totGames,2)
 
 	# League-only stats
-	totGamesL = int(statTable['League_Apps'].iloc[-1])
-	totGoalsL = int(statTable['League_Goals'].iloc[-1])
-	goalGamesL = round(totGoalsL/totGamesL,2)
+	# totGamesL = int(statTable['League_Apps'].iloc[-1])
+	# totGoalsL = int(statTable['League_Goals'].iloc[-1])
+	# goalGamesL = round(totGoalsL/totGamesL,2)
 
 	# Goals per game ratio
 	goalGames = round(totGoals/totGames,2)
@@ -86,3 +86,36 @@ def totGoalsLine(statTable, val):
 			)
 	
 		return fig	
+	
+	# add assists if I find data for it
+
+	# # If 'assists' is chosen in dropdown;
+	# elif val == "Assists":
+	# 	fig.add_trace(
+	# 			go.Bar(
+	# 			y=statTable['Total_Apps'].iloc[:-2],
+	# 			x=x,
+	# 			name="Assists per Season"   
+	# 			)
+	# 		)
+	# 	fig.add_trace(
+	# 		go.Scatter(y=statTable['Assists'].iloc[:-2],
+	# 				x=x,
+	# 				name="Goals per Season"
+	# 				),
+	# 			secondary_y=True,
+	# 	)
+
+	# 	fig.update_layout(
+	# 		title='Assists per Season',
+	# 		xaxis_title="Season",
+	# 		yaxis_title="Assists per Season",
+	# 		font_color="white",
+	# 		plot_bgcolor='rgb(0, 12, 39)',
+	# 		paper_bgcolor='rgb(0, 12, 39)',
+	# 		xaxis =  {'showgrid': False},
+	# 		yaxis = {'showgrid': False}
+	# 		)
+	
+	# 	return fig	
+
