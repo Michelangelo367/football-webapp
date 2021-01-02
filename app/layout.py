@@ -41,6 +41,8 @@ def layout() -> html.Div:
             ], className='two columns')
         ],className='row'),
         html.Br(),
+        html.Div(id="player-val"),
+        html.Br(),
         # Goals Graph
         html.Div(
             dcc.Graph(

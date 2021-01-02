@@ -3,7 +3,8 @@ import pandas as pd
 from get_data import table
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-
+import requests
+from bs4 import BeautifulSoup
 
 def totGoalsLine(statTable, val):
 	y = statTable['Total_Goals'].iloc[:-2]
@@ -33,6 +34,13 @@ def totGoalsLine(statTable, val):
 				go.Bar(
 				y=y,
 				x=x,
+				marker=dict(
+					color='rgb(22, 26, 72)',
+					# line=dict(
+					# color='MediumPurple',
+					# width=2
+					# )
+				),
 				name="Goals per Season"   
 				)
 			)
@@ -63,7 +71,14 @@ def totGoalsLine(statTable, val):
 				go.Bar(
 				y=statTable['Total_Apps'].iloc[:-2],
 				x=x,
-				name="Games Played per Season"   
+				marker=dict(
+					color='rgb(22, 26, 72)',
+					# line=dict(
+					# color='MediumPurple',
+					# width=2
+					# )
+				),
+				name="Games Played per Season",
 				)
 			)
 		fig.add_trace(
@@ -119,3 +134,42 @@ def totGoalsLine(statTable, val):
 	
 	# 	return fig	
 
+def playerValue(playerName: str):
+	"""
+	Get player value from transfer markt
+	"""
+
+	headers = {'User-Agent': 
+			'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'}
+
+	page = "https://www.transfermarkt.com/marktwertetop/wertvollstespieler"
+	pageTree = requests.get(page, headers=headers)
+	pageSoup = BeautifulSoup(pageTree.content, 'html.parser')
+
+	pageSoup
+
+	# Get player list
+	Players = pageSoup.find_all("a", {"class": "spielprofil_tooltip"})
+
+	Players[0].text
+
+	Values = pageSoup.find_all("td", {"class": "rechts hauptlink"})
+
+	Values[0].text
+
+	PlayersList = []
+	ValuesList = []
+
+	for i in range(len(Values)):
+		PlayersList.append(Players[i].text)
+		ValuesList.append(Values[i].text)
+		
+	df = pd.DataFrame({"Players":PlayersList,"Values":ValuesList})
+
+	name_df = pd.DataFrame([playerName])
+
+	name_df.columns = ['Players']
+
+	player_value = df.merge(name_df)
+
+	return player_value['Values']
