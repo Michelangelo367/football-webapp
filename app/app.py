@@ -15,7 +15,7 @@ from layout import layout
 # Import helper functions
 from analytics import totGoalsLine
 from get_data import table
-
+from analytics import playerValue
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
@@ -77,11 +77,11 @@ def goals_table(json_df):
 										style_table={'overflowX': 'scroll'},
 										style_as_list_view=True,
 										style_header={
-											'backgroundColor': 'rgb(21, 32, 58)',
+											'backgroundColor': 'rgb(0, 12, 39)',
 											'fontWeight': 'bold'
 											},
 										style_cell={
-													'backgroundColor': 'rgb(21, 32, 58)',
+													'backgroundColor': 'rgb(0, 12, 39)',
 													'textAlign': 'center',
 													'fontSize':15,
 													'font-family':'sans-serif'
@@ -105,6 +105,25 @@ def goalsLine(json_df, dropdownVal):
 		df = pd.read_json(json_df)
 		fig = totGoalsLine(df, dropdownVal)
 		return fig
+	else:
+		return dash.no_update
+
+@app.callback(
+	Output('player-val', 'children'),
+	[Input('my-input', 'value')]
+)
+def playerName(name):
+	# convert to Proper Case
+	name = name.title()
+	if name:
+		value = playerValue(name)
+		# if player value doesnt exist, do nothing
+		if value.empty:
+			pass
+		else:
+			return html.Div([
+					html.Span([html.Div("Player Value: "), html.Div(value)])
+				], className='row')
 	else:
 		return dash.no_update
 
